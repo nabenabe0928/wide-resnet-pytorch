@@ -11,6 +11,9 @@
     `conda install pytorch torchvision cudatoolkit=x.x -c pytorch` 
 
 ## performance
+
+CIFAR100
+
 ・TestAcc 81.60%(max accuracy over 4 runs)
 
 ## implementation
