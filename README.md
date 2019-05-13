@@ -1,10 +1,10 @@
 # wide-resnet-pytorch
 
-requirements
-・python3.7
-・cudax.x
-・pytorch
-    conda install pytorch torchvision cudatoolkit=x.x -c pytorch
+requirements \\
+・python3.7 \\
+・cudax.x \\
+・pytorch \\
+    conda install pytorch torchvision cudatoolkit=x.x -c pytorch \\
 
 performance
 ・TestAcc 81.60%(max accuracy over 4 runs)
