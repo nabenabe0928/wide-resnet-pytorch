@@ -87,11 +87,12 @@ def train(device, optimizer, learner, train_data, loss_func):
         bar.set_description("Loss: {0:.6f}, Accuracy: {1:.6f}".format(train_loss / n_train, float(train_acc) / n_train))
         bar.update()
     bar.close()
-    bar = tqdm(desc = "Testing", total = len(test_data), leave = False)
 
     return train_acc / n_train, train_loss / n_train
 
 def test(device, optimizer, learner, test_data, loss_func):
+    bar = tqdm(desc = "Testing", total = len(test_data), leave = False)
+    
     for data, target in test_data:
         data, target = data.to(device), target.to(device)
         y = learner(data)
