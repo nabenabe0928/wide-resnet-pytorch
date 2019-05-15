@@ -13,7 +13,7 @@ import torch.optim as optim
 import datetime
 from dataset import get_data
 from tqdm import tqdm
-from wide-resnet import WideResNet
+from wide_resnet import WideResNet
 
 def get_arguments():
     argp = ArgPar()
