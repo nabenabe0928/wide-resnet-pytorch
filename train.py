@@ -87,8 +87,8 @@ def train(device, optimizer, learner, train_data, loss_func):
         bar.set_description("Loss: {0:.6f}, Accuracy: {1:.6f}".format(train_loss / n_train, float(train_acc) / n_train))
         bar.update()
     bar.close()
-
-    return train_acc / n_train, train_loss / n_train
+    
+    return float(train_acc) / n_train, train_loss / n_train
 
 def test(device, optimizer, learner, test_data, loss_func):
     test_acc, test_loss, n_test = 0, 0, 0
@@ -106,7 +106,7 @@ def test(device, optimizer, learner, test_data, loss_func):
         bar.update()
     bar.close()
     
-    return test_acc / n_test, test_loss / n_test
+    return float(test_acc) / n_test, test_loss / n_test
 
 def main(learner):
 
@@ -158,7 +158,6 @@ if __name__ == "__main__":
     hp_dict = get_arguments()
     hp_tuple = namedtuple("_hyperparameters", (var_name for var_name in hp_dict.keys() ) )
     hyperparameters = hp_tuple(**hp_dict)
-    print(hp_dict)
     learner = WideResNet(hyperparameters)
     
     print("Start Training")
