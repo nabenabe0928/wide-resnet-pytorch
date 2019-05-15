@@ -37,6 +37,9 @@ def get_arguments():
     
     parsed_parameters = argp.parse_args()
     HyperParameters = {}
+    
+    for k in hp.keys():
+        HyperParameters[k] =  eval("parsed_parameters.{}".format(k))
         
     return HyperParameters
 
@@ -62,7 +65,7 @@ def print_result(values):
     
     print(f_vars.format(*values))
 
-def train(device, optimizer, learner, train_data):
+def train(device, optimizer, learner, train_data, loss_func):
     train_acc, train_loss, n_train = 0, 0, 0
     lr = optimizer.param_groups[0]["lr"]
     learner.train()
@@ -88,7 +91,7 @@ def train(device, optimizer, learner, train_data):
 
     return train_acc / n_train, train_loss / n_train
 
-def test(device, optimizer, learner, test_data):
+def test(device, optimizer, learner, test_data, loss_func):
     for data, target in test_data:
         data, target = data.to(device), target.to(device)
         y = learner(data)
@@ -133,12 +136,12 @@ def main(learner):
     print_result(rsl_keys)
     
     for epoch in range(learner.epochs):
-        train_acc, train_loss = train(device, optimizer, learner, train_data)     
+        train_acc, train_loss = train(device, optimizer, learner, train_data, loss_func)     
         
         learner.eval() # switch to test mode( make model not save the record of calculation)
 
         with torch.no_grad():
-            test_acc, test_loss = test(device, optimizer, learner, test_data)
+            test_acc, test_loss = test(device, optimizer, learner, test_data, loss_func)
 
 
         time_now = str(datetime.datetime.today())
@@ -151,7 +154,8 @@ def main(learner):
 if __name__ == "__main__":
     hp_dict = get_arguments()
     hp_tuple = namedtuple("_hyperparameters", (var_name for var_name in hp_dict.keys() ) )
-    self.hyperparameters = hp_tuple(**self.hp_dict)
+    hyperparameters = hp_tuple(**hp_dict)
+    print(hp_dict)
     learner = WideResNet(hyperparameters)
     
     print("Start Training")
