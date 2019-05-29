@@ -8,7 +8,7 @@
 
 ・pytorch 
 
-    `conda install pytorch torchvision cudatoolkit=x.x -c pytorch` 
+`conda install pytorch torchvision cudatoolkit=x.x -c pytorch` 
 
 ## performance
 
